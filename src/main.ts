@@ -17,6 +17,7 @@ async function bootstrap() {
     .setTitle('Biocom API')
     .setDescription('상담 예약 시스템 API 문서')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document, {

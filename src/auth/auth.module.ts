@@ -17,10 +17,11 @@ import { User } from '../users/entities/user.entity';
       inject: [ConfigService],
       useFactory: (configService: ConfigService): JwtModuleOptions => {
         const secret = configService.getOrThrow<string>('JWT_SECRET');
-        const expiresIn = configService.get<number>('JWT_EXPIRES_IN') ?? 3600;
+        const raw = configService.get<string>('JWT_EXPIRES_IN') ?? '3600';
+        const expiresIn = /^\d+$/.test(raw) ? parseInt(raw, 10) : raw;
         return {
           secret,
-          signOptions: { expiresIn },
+          signOptions: { expiresIn: expiresIn as number },
         };
       },
     }),

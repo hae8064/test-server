@@ -1,98 +1,101 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Biocom API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+상담 예약 시스템 API 서버. 상담사의 슬롯 관리, 예약 링크 발급, 신청자의 예약 및 상담 기록 관리 기능을 제공합니다.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 기술 스택
 
-## Description
+- **NestJS** (Node.js)
+- **TypeORM** + PostgreSQL
+- **JWT** 인증
+- **Swagger** API 문서
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 사전 요구사항
 
-## Project setup
+- Node.js 18+
+- pnpm
+- Docker (PostgreSQL용, 또는 로컬 PostgreSQL)
+
+## 실행 가이드
+
+### 1. 의존성 설치
 
 ```bash
-$ pnpm install
+pnpm install
 ```
 
-## Compile and run the project
+### 2. 환경 변수 설정
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+cp .env.dev .env
 ```
 
-## Run tests
+`.env`에서 다음 항목을 실제 값으로 수정하세요:
+
+| 변수          | 설명              | 기본값                     |
+| ------------- | ----------------- | -------------------------- |
+| `DB_HOST`     | PostgreSQL 호스트 | localhost                  |
+| `DB_PORT`     | PostgreSQL 포트   | 5436 (docker-compose 기본) |
+| `DB_USER`     | DB 사용자         | postgres                   |
+| `DB_PASSWORD` | DB 비밀번호       | (필수)                     |
+| `DB_NAME`     | DB 이름           | biocom                     |
+| `JWT_SECRET`  | JWT 서명 키       | (필수)                     |
+| `PORT`        | 서버 포트         | 8008                       |
+
+### 3. 실행
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+# PostgreSQL + Nest 서버 동시 실행 (권장)
+pnpm run dev
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+또는 별도 실행:
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+pnpm run db:start      # PostgreSQL 컨테이너만 기동
+pnpm run start:dev     # Nest 서버 실행 (watch 모드)
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 4. 접속
 
-## Resources
+- **API**: http://localhost:8008 (PORT 값에 따라 변경)
+- **Swagger 문서**: http://localhost:8008/docs
 
-Check out a few resources that may come in handy when working with NestJS:
+## API 개요
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### 인증
 
-## Support
+- `POST /auth/register` - 회원가입 (ADMIN/COUNSELOR)
+- `POST /auth/login` - 로그인 (JWT 발급)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### 관리자 - 슬롯
 
-## Stay in touch
+- `GET /admin/slots` - 슬롯 목록 (`?includeBookings=true` 시 예약 포함)
+- `GET /admin/slots/:id` - 슬롯 단건 조회
+- `GET /admin/slots/:slotId/bookings` - 슬롯별 예약자 목록
+- `POST /admin/slots` - 슬롯 생성
+- `PATCH /admin/slots/:id` - 슬롯 수정
+- `DELETE /admin/slots/:id` - 슬롯 삭제
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 관리자 - 예약 링크
 
-## License
+- `POST /admin/email-links` - 예약 링크(토큰) 생성 및 이메일 발송
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### 관리자 - 상담 기록
+
+- `POST /admin/bookings/:bookingId/session` - 상담 기록 저장 (notes, outcome 등)
+
+### 공개 (토큰 필요)
+
+- `GET /public/reserve?token=xxx` - 예약 가능 슬롯 조회 (`date` 옵션 지원)
+- `POST /public/bookings` - 예약 생성
+
+> 관리자 API는 `Authorization: Bearer <JWT>` 헤더가 필요합니다.
+
+## 기타 스크립트
+
+```bash
+pnpm run build        # 빌드
+pnpm run start        # 프로덕션 실행 (node dist/main)
+pnpm run db:stop      # PostgreSQL 컨테이너 중지
+pnpm run lint         # ESLint
+```

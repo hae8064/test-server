@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { ApplicantsModule } from './applicants/applicants.module';
 import { BookingsModule } from './bookings/bookings.module';
 import { EmailLinkTokensModule } from './email-link-tokens/email-link-token.module';
+import { PublicModule } from './public/public.module';
 import { ScheduleSlotsModule } from './schedule-slots/schedule-slots.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { UsersModule } from './users/users.module';
@@ -28,6 +29,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     UsersModule,
     ScheduleSlotsModule,
+    PublicModule,
     ApplicantsModule,
     BookingsModule,
     SessionsModule,

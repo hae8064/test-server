@@ -12,7 +12,7 @@ import { isEmail } from 'class-validator';
 import { User, UserRole } from '../users/entities/user.entity';
 import { EmailLinkToken } from './entities/email-link-token.entity';
 import { CreateEmailLinkDto } from './dto/create-email-link.dto';
-import { formatDateToKst } from '../schedule-slots/slot.utils';
+import { formatDateToKst } from '../common/utils/date.utils';
 import { MailService } from '../mail/mail.service';
 import type { JwtValidateResult } from '../auth/strategies/jwt.strategy';
 
@@ -73,8 +73,8 @@ export class EmailLinkTokensService {
       this.configService.get<string>('APP_URL') ?? 'http://localhost:3000';
     const link = `${baseUrl.replace(/\/$/, '')}/public/reserve?token=${rawToken}`;
 
-    // 실제 메일 발송
-    await this.mailService.sendReservationLink(counselor.email, link);
+    // TODO: 추후 해당 주석 해제 및 smtp관련 설정 필요
+    // await this.mailService.sendReservationLink(counselor.email, link);
 
     return {
       link,

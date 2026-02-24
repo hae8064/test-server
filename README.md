@@ -37,7 +37,7 @@ cp .env.dev .env
 | `DB_PORT`     | PostgreSQL 포트   | 5436 (docker-compose 기본) |
 | `DB_USER`     | DB 사용자         | postgres                   |
 | `DB_PASSWORD` | DB 비밀번호       | (필수)                     |
-| `DB_NAME`     | DB 이름           | biocom                     |
+| `DB_NAME`     | DB 이름           | test                     |
 | `JWT_SECRET`  | JWT 서명 키       | (필수)                     |
 | `PORT`        | 서버 포트         | 8008                       |
 
